@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DAC Blood Donation Camp — June 26, 2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red:       #C41C1C;
+  --red-dark:  #9B1515;
+  --red-light: #FFF0F0;
+  --red-mid:   #F5C6C6;
+  --navy:      #0D1B2A;
+  --gold:      #C8922A;
+  --ink:       #1C1C1C;
+  --muted:     #6B6B6B;
+  --border:    #E8E0E0;
+  --surface:   #F9F5F5;
+  --white:     #FFFFFF;
+  --success:   #1B6B35;
+  --success-bg:#E6F4EC;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F2EDED;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ─────────────────────────────────────── */
+.topbar {
+  background: var(--navy);
+  padding: 10px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar .logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar img.logo {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.logo-fallback {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.logo-fallback .l1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+.logo-fallback .l2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 1px;
+}
+.topbar-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+/* ── HERO ────────────────────────────────────────── */
+.hero {
+  background: var(--red);
+  position: relative;
+  overflow: hidden;
+  padding: 22px 24px 20px;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.08);
+}
+.hero-eyebrow {
+  display: none;
+}
+.hero-drop {
+  display: none;
+}
+.hero-anim {
+  display: block;
+  width: min(420px, 90%);
+  margin: 0 auto 6px;
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(20px, 4vw, 28px);
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+.hero h1 span { color: rgba(255,255,255,0.65); font-weight: 500; }
+.hero-sub {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.75);
+  position: relative;
+  z-index: 1;
+}
+.hero-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+.hero-pill {
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── ELIGIBILITY STRIP ───────────────────────────── */
+.elig-strip {
+  background: var(--navy);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.elig-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+.elig-item:last-child { border-right: none; }
+.elig-item strong { color: var(--gold); font-family: 'Montserrat', sans-serif; }
+
+/* ── MAIN ────────────────────────────────────────── */
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 36px 20px 80px;
+}
+
+/* ── PROGRESS STEPS ──────────────────────────────── */
+.steps {
+  display: flex;
+  align-items: center;
+  margin-bottom: 36px;
+  gap: 0;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.step-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--red-mid);
+  margin: 0 6px;
+}
+
+/* ── CARDS ───────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 28px 28px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(196,28,28,0.06);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--red-light);
+}
+.card-icon {
+  width: 38px; height: 38px;
+  background: var(--red-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--red);
+  letter-spacing: -0.3px;
+}
+.card-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+/* ── FIELDS ──────────────────────────────────────── */
+.row { display: grid; gap: 16px; margin-bottom: 16px; }
+.row.cols2 { grid-template-columns: 1fr 1fr; }
+.row.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+@media(max-width:540px) {
+  .row.cols2, .row.cols3 { grid-template-columns: 1fr; }
+  .card { padding: 20px 16px; }
+  .elig-item { padding: 10px 14px; font-size: 11px; }
+}
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+
+label.lbl {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+label.lbl .req { color: var(--red); }
+
+input[type=text], input[type=email], input[type=tel],
+input[type=number], input[type=date], select, textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 13px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.17s, box-shadow 0.17s, background 0.17s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--red);
+  background: var(--white);
+  box-shadow: 0 0 0 3.5px rgba(196,28,28,0.1);
+}
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23999' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+textarea { resize: vertical; min-height: 76px; }
+
+/* radio pills */
+.rpills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.rpill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: border-color .15s, background .15s, color .15s;
+  user-select: none;
+}
+.rpill input[type=radio] { accent-color: var(--red); width: 14px; height: 14px; margin: 0; }
+.rpill:has(input:checked) {
+  border-color: var(--red);
+  background: var(--red-light);
+  color: var(--red);
+}
+
+/* checkboxes */
+.cbox-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.cbox {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; line-height: 1.5; cursor: pointer;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  transition: border-color .15s, background .15s;
+}
+.cbox input[type=checkbox] { accent-color: var(--red); width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; }
+.cbox:has(input:checked) { border-color: var(--red); background: var(--red-light); }
+
+/* ── DO'S & DON'TS ───────────────────────────────── */
+.dos-donts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+@media(max-width:560px) { .dos-donts { grid-template-columns: 1fr; } }
+.dd-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
+}
+.dd-do   { background: #E8F5E9; color: #2E7D32; }
+.dd-dont { background: #FFF0F0; color: var(--red); }
+.dd-list {
+  list-style: none;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 8px 0;
+  background: var(--white);
+}
+.dd-list li {
+  font-size: 12.5px;
+  color: var(--ink);
+  padding: 6px 12px;
+  line-height: 1.45;
+  border-bottom: 1px solid #F5F0F0;
+  display: flex;
+  gap: 6px;
+}
+.dd-list li:last-child { border-bottom: none; }
+.decl-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  padding-top: 4px;
+}
+
+/* ── SLOT GRID (kept for reference, hidden) ──────── */
+.slot-grid { display: none; }
+.slot-card { display: none; }
+
+/* ── BLOOD GROUP VISUAL ──────────────────────────── */
+.blood-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.bg-btn {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--surface);
+  transition: all .15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.bg-btn:has(input:checked) {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+.bg-btn input[type=radio] { display: none; }
+
+/* ── CONSENT ─────────────────────────────────────── */
+.consent-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 13px; line-height: 1.55; padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.consent-item:last-child { border-bottom: none; padding-bottom: 0; }
+.consent-item input[type=checkbox] { accent-color: var(--red); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+/* ── SUBMIT ──────────────────────────────────────── */
+.submit-area { text-align: center; margin-top: 32px; }
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 14px;
+  padding: 17px 52px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(196,28,28,0.35);
+  transition: background .18s, transform .12s, box-shadow .18s;
+}
+.submit-btn:hover { background: var(--red-dark); box-shadow: 0 8px 28px rgba(196,28,28,0.45); transform: translateY(-1px); }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { background: var(--red-mid); box-shadow: none; cursor: not-allowed; transform: none; }
+.submit-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+/* ── ERROR ───────────────────────────────────────── */
+#errBox {
+  display: none;
+  background: #FFF3CD;
+  border: 1px solid #FFCA2C;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: #856404;
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* ── SUCCESS ─────────────────────────────────────── */
+#successScreen {
+  display: none;
+  background: var(--white);
+  border-radius: 20px;
+  border: 2px solid #A8D5B8;
+  padding: 52px 32px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 4px 24px rgba(27,107,53,0.1);
+}
+#successScreen .s-icon { font-size: 64px; margin-bottom: 16px; }
+#successScreen h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: var(--success);
+  margin-bottom: 10px;
+}
+#successScreen p { font-size: 14px; color: #3a7d52; line-height: 1.6; }
+.success-card {
+  background: var(--success-bg);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* ── FOOTER ──────────────────────────────────────── */
+footer {
+  background: var(--navy);
+  text-align: center;
+  padding: 20px;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.3px;
+}
+footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo-wrap">
+    <img class="logo" src="DAC_logo.jpeg" alt="DAC"
+      onerror="this.style.display='none'; document.getElementById('logo-fb').style.display='flex'"/>
+    <div class="logo-fallback" id="logo-fb" style="display:none">
+      <span class="l1">DAC</span>
+      <span class="l2">REALTY</span>
+    </div>
+  </div>
+  <div class="topbar-tag">Employee Welfare Initiative</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-anim">
+    <svg width="100%" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="armGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E8B89A"/><stop offset="60%" stop-color="#D4956E"/><stop offset="100%" stop-color="#C07B55"/></linearGradient>
+        <linearGradient id="tableSurface" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#F5EDE4"/><stop offset="100%" stop-color="#EAD9C8"/></linearGradient>
+        <linearGradient id="bagFill" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#B01A1A"/><stop offset="100%" stop-color="#8B1010"/></linearGradient>
+        <linearGradient id="bagBody" x1="0%" y1="0%" x2="10%" y2="100%"><stop offset="0%" stop-color="#F9E8E8"/><stop offset="100%" stop-color="#F0D0D0"/></linearGradient>
+        <linearGradient id="wallGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FDF6F0"/><stop offset="100%" stop-color="#F5EAE0"/></linearGradient>
+        <clipPath id="bagClip2"><path d="M482,68 L502,68 Q510,68 512,76 L516,148 Q517,164 508,172 Q500,178 492,178 Q484,178 476,172 Q467,164 468,148 L472,76 Q474,68 482,68 Z"/></clipPath>
+      </defs>
+      <style>
+        @keyframes flowPulse{0%{stroke-dashoffset:0;opacity:.15}30%{opacity:1}70%{opacity:1}100%{stroke-dashoffset:-260;opacity:.15}}
+        @keyframes flowPulse2{0%{stroke-dashoffset:0;opacity:.1}30%{opacity:.8}70%{opacity:.8}100%{stroke-dashoffset:-260;opacity:.1}}
+        @keyframes bagRise{0%,100%{transform:scaleY(.1) translateY(0);opacity:.2}50%{transform:scaleY(.75) translateY(0);opacity:1}}
+        @keyframes gentlePulse{0%,100%{r:4;opacity:.5}50%{r:9;opacity:0}}
+        @keyframes floatUp{0%{transform:translateY(0);opacity:0}20%{opacity:.65}100%{transform:translateY(-24px);opacity:0}}
+        @keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.18)}28%{transform:scale(1)}42%{transform:scale(1.1)}56%{transform:scale(1)}}
+        .fl{animation:flowPulse 2.4s ease-in-out infinite}
+        .fl2{animation:flowPulse2 2.4s ease-in-out infinite .8s}
+        .bagblood{transform-origin:492px 178px;animation:bagRise 2.4s ease-in-out infinite}
+        .pdot{animation:gentlePulse 2.4s ease-in-out infinite}
+        .dr1{animation:floatUp 3s ease-in-out infinite .3s}
+        .dr2{animation:floatUp 3s ease-in-out infinite 1.5s}
+        .hrt{transform-origin:492px 108px;animation:heartbeat 2.4s ease-in-out infinite}
+      </style>
+      <rect x="0" y="0" width="680" height="180" fill="url(#wallGrad)"/>
+      <line x1="0" y1="60" x2="680" y2="60" stroke="#EDE0D4" stroke-width="0.5"/>
+      <line x1="0" y1="120" x2="680" y2="120" stroke="#EDE0D4" stroke-width="0.5"/>
+      <rect x="0" y="178" width="680" height="82" fill="url(#tableSurface)"/>
+      <rect x="0" y="178" width="680" height="3" fill="#D4B89A"/>
+      <rect x="550" y="20" width="6" height="160" rx="3" fill="#C8C0B8"/>
+      <rect x="530" y="17" width="42" height="5" rx="2.5" fill="#C8C0B8"/>
+      <circle cx="531" cy="19.5" r="4" fill="#B8B0A8"/><circle cx="571" cy="19.5" r="4" fill="#B8B0A8"/>
+      <path d="M553,22 Q553,14 558,14 Q563,14 563,20" stroke="#A8A0A0" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M488,28 Q488,22 492,22 Q496,22 496,28" stroke="#C8B8B8" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="489" y="28" width="6" height="20" rx="2" fill="#D8CCCC"/>
+      <rect x="488" y="46" width="8" height="24" rx="2" fill="#C8BCBC"/>
+      <path d="M482,68 L502,68 Q510,68 512,76 L516,148 Q517,164 508,172 Q500,178 492,178 Q484,178 476,172 Q467,164 468,148 L472,76 Q474,68 482,68 Z" fill="url(#bagBody)" stroke="#D4BCBC" stroke-width="1.5"/>
+      <line x1="480" y1="80" x2="480" y2="165" stroke="#E8D8D8" stroke-width="1"/><line x1="505" y1="80" x2="505" y2="165" stroke="#E8D8D8" stroke-width="0.5"/>
+      <path d="M482,68 L502,68 Q510,68 512,76 L516,148 Q517,164 508,172 Q500,178 492,178 Q484,178 476,172 Q467,164 468,148 L472,76 Q474,68 482,68 Z" fill="url(#bagFill)" clip-path="url(#bagClip2)" class="bagblood"/>
+      <rect x="476" y="88" width="32" height="44" rx="4" fill="white" stroke="#E0CECE" stroke-width="1"/>
+      <rect x="488" y="93" width="8" height="2.5" rx="1" fill="#C41C1C"/><rect x="490.5" y="90.5" width="2.5" height="7.5" rx="1" fill="#C41C1C"/>
+      <rect x="479" y="104" width="26" height="2" rx="1" fill="#E8D0D0"/><rect x="481" y="109" width="22" height="2" rx="1" fill="#E8D0D0"/>
+      <rect x="479" y="114" width="26" height="2" rx="1" fill="#E8D0D0"/><rect x="481" y="119" width="20" height="2" rx="1" fill="#E8D0D0"/>
+      <line x1="512" y1="100" x2="516" y2="100" stroke="#CDB8B8" stroke-width="1"/>
+      <line x1="512" y1="115" x2="516" y2="115" stroke="#CDB8B8" stroke-width="1"/>
+      <line x1="512" y1="130" x2="516" y2="130" stroke="#CDB8B8" stroke-width="1"/>
+      <line x1="512" y1="145" x2="516" y2="145" stroke="#CDB8B8" stroke-width="1"/>
+      <line x1="512" y1="160" x2="516" y2="160" stroke="#CDB8B8" stroke-width="1"/>
+      <rect x="489" y="176" width="6" height="12" rx="2" fill="#C8BCBC"/>
+      <rect x="488" y="186" width="8" height="4" rx="2" fill="#B8ACAC"/>
+      <path d="M492,190 C492,205 440,215 400,215 C360,215 340,214 330,213 C300,212 270,210 250,208 C230,206 220,203 215,198 C210,193 210,188 210,183" stroke="#E0CECE" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M492,190 C492,205 440,215 400,215 C360,215 340,214 330,213 C300,212 270,210 250,208 C230,206 220,203 215,198 C210,193 210,188 210,183" stroke="#F0E0E0" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path class="fl" d="M492,190 C492,205 440,215 400,215 C360,215 340,214 330,213 C300,212 270,210 250,208 C230,206 220,203 215,198 C210,193 210,188 210,183" stroke="#C41C1C" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="40 220"/>
+      <path class="fl2" d="M492,190 C492,205 440,215 400,215 C360,215 340,214 330,213 C300,212 270,210 250,208 C230,206 220,203 215,198 C210,193 210,188 210,183" stroke="#A01818" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="24 236"/>
+      <rect x="486" y="186" width="12" height="22" rx="5" fill="#EDD8D8" stroke="#CDB8B8" stroke-width="1"/>
+      <ellipse cx="492" cy="192" rx="4" ry="2" fill="#D4A0A0" opacity="0.5"/>
+      <path d="M90,178 Q90,155 120,148 L390,148 Q420,148 420,160 L420,180" fill="#B87050" opacity="0.3"/>
+      <path d="M100,178 Q100,148 130,142 L390,142 Q426,142 428,162 Q430,180 430,182 L90,182 Z" fill="url(#armGrad)"/>
+      <ellipse cx="270" cy="148" rx="130" ry="8" fill="#ECC09A" opacity="0.4"/>
+      <ellipse cx="115" cy="165" rx="22" ry="18" fill="#D4956E"/>
+      <path d="M160,150 C190,148 220,147 260,148 C300,149 330,150 360,151" stroke="#B87878" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="3 4"/>
+      <ellipse cx="210" cy="150" rx="12" ry="6" fill="#C8907A" opacity="0.5"/>
+      <rect x="196" y="147" width="30" height="8" rx="3" fill="#F0E8D8" stroke="#D8D0C0" stroke-width="0.5"/>
+      <path d="M226,151 L246,149 L248,151" stroke="#B8B0A0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="226" y1="151" x2="248" y2="151" stroke="#C8C0B0" stroke-width="1.5"/>
+      <rect x="192" y="147" width="8" height="9" rx="1" fill="#F5EDD8" stroke="#DDD5C0" stroke-width="0.5"/>
+      <rect x="228" y="146" width="8" height="10" rx="1" fill="#F5EDD8" stroke="#DDD5C0" stroke-width="0.5"/>
+      <path d="M210,155 L210,165 C210,175 210,180 210,183" stroke="#D8C8C8" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M210,155 L210,165 C210,175 210,180 210,183" stroke="#F0E4E4" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="210" cy="151" r="5" fill="none" stroke="#C41C1C" stroke-width="1" class="pdot"/>
+      <circle cx="210" cy="151" r="2.5" fill="#C41C1C" opacity="0.7"/>
+      <g class="dr1" style="transform-origin:460px 95px"><path d="M460,95 Q457,89 457,87 Q457,83 460,83 Q463,83 463,87 Q463,89 460,95Z" fill="#C41C1C" opacity="0.5"/></g>
+      <g class="dr2" style="transform-origin:472px 105px"><path d="M472,105 Q470,100 470,98.5 Q470,96 472,96 Q474,96 474,98.5 Q474,100 472,105Z" fill="#A01818" opacity="0.35"/></g>
+      <polyline points="60,90 100,90 115,90 122,70 128,110 134,80 140,100 146,90 180,90 240,90" stroke="#E8C0C0" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <g class="hrt"><path d="M492,100 C492,100 484,93 484,88 C484,84 488,81 492,84 C496,81 500,84 500,88 C500,93 492,100 492,100Z" fill="#C41C1C" opacity="0.7"/></g>
+      <ellipse cx="270" cy="180" rx="160" ry="6" fill="#B87050" opacity="0.12"/>
+    </svg>
+  </div>
+  <div class="hero-eyebrow" style="display:none"></div>
+  <span class="hero-drop" style="display:none"></span>
+  <h1>Give Blood.<br/><span>Save Lives.</span></h1>
+  <p class="hero-sub">Register your slot for our on-site blood donation drive</p>
+  <div class="hero-pills">
+    <div class="hero-pill">📅 Friday, June 26, 2026</div>
+    <div class="hero-pill">🏢 Office Premises</div>
+    <div class="hero-pill">⏰ 10 AM – 1 PM</div>
+  </div>
+</div>
+
+<!-- ELIGIBILITY STRIP -->
+<div class="elig-strip">
+  <div class="elig-item">🧑 Age <strong>18–65 yrs</strong></div>
+  <div class="elig-item">⚖️ Weight ≥ <strong>45 kg</strong></div>
+  <div class="elig-item">🩸 Gap ≥ <strong>90 days</strong> since last donation</div>
+  <div class="elig-item">🍽️ <strong>Light meal</strong> before donating</div>
+</div>
+
+<main>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-label">Personal & Health</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-label">Declaration & Consent</div>
+    </div>
+  </div>
+
+  <form id="donationForm" novalidate>
+
+    <!-- ── SECTION 1: PERSONAL ── -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon">👤</div>
+        <div>
+          <div class="card-title">Personal Information</div>
+          <div class="card-desc">Your basic details for camp coordination</div>
+        </div>
+      </div>
+
+      <div class="row cols2">
+        <div class="field">
+          <label class="lbl">First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" name="firstName" placeholder="e.g. Arjun" required/>
+        </div>
+        <div class="field">
+          <label class="lbl">Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" name="lastName" placeholder="e.g. Sharma" required/>
+        </div>
+      </div>
+
+      <div class="row cols2">
+        <div class="field">
+          <label class="lbl">Employee ID <span class="req">*</span></label>
+          <input type="text" id="empId" name="empId" placeholder="EMP-00123" required/>
+        </div>
+        <div class="field">
+          <label class="lbl">Department <span class="req">*</span></label>
+          <select id="dept" name="dept" required>
+            <option value="">Select department</option>
+            <option>Engineering</option>
+            <option>Product</option>
+            <option>Design & Marketing</option>
+            <option>Sales</option>
+            <option>Finance</option>
+            <option>HR & Admin</option>
+            <option>Operations</option>
+            <option>Legal</option>
+            <option>Projects</option>
+            <option>Customer Success</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row cols3">
+        <div class="field">
+          <label class="lbl">Date of Birth <span class="req">*</span></label>
+          <input type="date" id="dob" name="dob" required/>
+        </div>
+        <div class="field">
+          <label class="lbl">Mobile <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required/>
+        </div>
+        <div class="field">
+          <label class="lbl">Work Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@company.com" required/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl">Gender <span class="req">*</span></label>
+          <div class="rpills">
+            <label class="rpill"><input type="radio" name="gender" value="Male" required/> Male</label>
+            <label class="rpill"><input type="radio" name="gender" value="Female"/> Female</label>
+            <label class="rpill"><input type="radio" name="gender" value="Prefer not to say"/> Prefer not to say</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row cols2">
+        <div class="field">
+          <label class="lbl">Weight (kg) <span class="req">*</span></label>
+          <input type="number" id="weight" name="weight" placeholder="e.g. 68" min="45" max="200" required/>
+        </div>
+        <div class="field">
+          <label class="lbl">Blood Group <span class="req">*</span></label>
+          <div class="blood-grid">
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="A+" required/> A+</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="A−"/> A−</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="B+"/> B+</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="B−"/> B−</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="O+"/> O+</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="O−"/> O−</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="AB+"/> AB+</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="AB−"/> AB−</label>
+            <label class="bg-btn"><input type="radio" name="bloodGroup" value="Unknown"/> ❓</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SECTION 2: HEALTH ── -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon">🏥</div>
+        <div>
+          <div class="card-title">Health Information</div>
+          <div class="card-desc">Reviewed by the medical team on the day of the camp</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl">Have you donated blood before? <span class="req">*</span></label>
+          <div class="rpills">
+            <label class="rpill"><input type="radio" name="donatedBefore" value="Yes" required/> Yes, I have</label>
+            <label class="rpill"><input type="radio" name="donatedBefore" value="No"/> No, first time</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row cols2">
+        <div class="field">
+          <label class="lbl">Last donation date (if applicable)</label>
+          <input type="date" id="lastDonation" name="lastDonation"/>
+        </div>
+        <div class="field">
+          <label class="lbl">Are you on any medication?</label>
+          <div class="rpills">
+            <label class="rpill"><input type="radio" name="onMedication" value="Yes"/> Yes</label>
+            <label class="rpill"><input type="radio" name="onMedication" value="No"/> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl">If yes, specify medication(s)</label>
+          <input type="text" id="medications" name="medications" placeholder="e.g. Blood thinners, antibiotics…"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl">Do any of these apply to you? (select all that apply)</label>
+          <div class="cbox-list">
+            <label class="cbox"><input type="checkbox" name="conditions" value="Diabetes"/> Diabetes</label>
+            <label class="cbox"><input type="checkbox" name="conditions" value="Hypertension"/> Hypertension / High Blood Pressure</label>
+            <label class="cbox"><input type="checkbox" name="conditions" value="Heart disease"/> Heart disease or recent cardiac procedure</label>
+            <label class="cbox"><input type="checkbox" name="conditions" value="Anemia"/> Anemia / low haemoglobin</label>
+            <label class="cbox"><input type="checkbox" name="conditions" value="HIV/Hepatitis"/> HIV / Hepatitis B or C</label>
+            <label class="cbox"><input type="checkbox" name="conditions" value="None"/> ✅ None of the above</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl">Any additional health notes for the medical team</label>
+          <textarea id="healthNotes" name="healthNotes" placeholder="Optional — anything else the team should know…"></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl">Remarks / Special requests</label>
+          <textarea id="remarks" name="remarks" placeholder="Anything you'd like us to know…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SECTION 3: CONSENT ── -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon">📋</div>
+        <div>
+          <div class="card-title">Do's & Don'ts · Declaration</div>
+          <div class="card-desc">Please read carefully before donating blood</div>
+        </div>
+      </div>
+
+      <!-- DO'S & DON'TS GRID -->
+      <div class="dos-donts">
+        <div class="dos-col">
+          <div class="dd-header dd-do">✅ Do's — Before Donating</div>
+          <ul class="dd-list">
+            <li>💧 Drink plenty of water (at least 2–3 glasses)</li>
+            <li>🍽️ Eat a light, nutritious meal 2–3 hours before</li>
+            <li>😴 Get a good night's sleep (minimum 7 hours)</li>
+            <li>👕 Wear clothing with sleeves that roll up easily</li>
+            <li>🆔 Carry your employee ID to the venue</li>
+            <li>🧘 Stay relaxed — deep breaths help!</li>
+            <li>🪑 Rest for at least 15 minutes after donating</li>
+            <li>🍪 Have a snack/juice provided at the camp post-donation</li>
+          </ul>
+        </div>
+        <div class="donts-col">
+          <div class="dd-header dd-dont">🚫 Don'ts — Before & After</div>
+          <ul class="dd-list">
+            <li>🚬 No smoking for at least 2 hours before and after</li>
+            <li>🍺 No alcohol for 24 hours before donation</li>
+            <li>🏋️ Avoid heavy exercise or strenuous activity on the day</li>
+            <li>☕ Skip caffeinated drinks (tea/coffee) before donating</li>
+            <li>🍔 Avoid fatty or oily food before the donation</li>
+            <li>🛵 Do not drive two-wheelers immediately after donating</li>
+            <li>💊 Do not donate if on antibiotics or blood thinners</li>
+            <li>🤧 Do not donate if you have cold, fever, or infection</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DECLARATION CHECKBOXES -->
+      <div class="decl-title">I confirm that:</div>
+      <div>
+        <label class="consent-item">
+          <input type="checkbox" id="c1" required/>
+          All information I have provided is accurate and complete to the best of my knowledge.
+        </label>
+        <label class="consent-item">
+          <input type="checkbox" id="c2" required/>
+          I have read and will follow the Do's &amp; Don'ts listed above on the day of donation.
+        </label>
+        <label class="consent-item">
+          <input type="checkbox" id="c3" required/>
+          I consent to my personal and health data being used solely for coordinating this blood donation camp.
+        </label>
+        <label class="consent-item">
+          <input type="checkbox" id="c4" required/>
+          I understand that my final eligibility will be confirmed by the medical team on the day of the event.
+        </label>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button type="submit" class="submit-btn" id="submitBtn">
+        🩸 Register as Donor
+      </button>
+      <div class="submit-note">Your data is stored securely and used only for camp coordination.</div>
+    </div>
+
+    <div id="errBox"></div>
+  </form>
+
+  <div id="successScreen">
+    <div class="s-icon">🎉</div>
+    <h2>You're Registered!</h2>
+    <p id="successDetail">Thank you for stepping up. Your slot has been noted and a reminder will be sent to your email before the camp.</p>
+    <div class="success-card" id="successSummary"></div>
+  </div>
+</main>
+
+<footer>
+  <strong>DAC Blood Donation Camp</strong> &nbsp;·&nbsp; June 26, 2026 &nbsp;·&nbsp;
+  Data collected securely and used only for camp coordination.
+</footer>
+
+<script>
+  // ─────────────────────────────────────────────────────────
+  //  CONFIGURATION — paste your Google Apps Script URL below
+  // ─────────────────────────────────────────────────────────
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxmz49_-EaorcdCTmK5CSfCaKQ5eVdANeoT4TXEI0SFQd2ivi2tE95ncLXba-7werMk/exec";
+  // ─────────────────────────────────────────────────────────
+
+  const form    = document.getElementById("donationForm");
+  const btn     = document.getElementById("submitBtn");
+  const errBox  = document.getElementById("errBox");
+  const okScr   = document.getElementById("successScreen");
+
+  function getRadio(name) {
+    const el = document.querySelector(`[name="${name}"]:checked`);
+    return el ? el.value : "";
+  }
+  function getChecked(name) {
+    return [...document.querySelectorAll(`[name="${name}"]:checked`)]
+      .map(e => e.value).join(", ") || "None selected";
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errBox.style.display = "none";
+
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const payload = {
+      timestamp:      new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      firstName:      form.firstName.value.trim(),
+      lastName:       form.lastName.value.trim(),
+      employeeId:     form.empId.value.trim(),
+      department:     form.dept.value,
+      dob:            form.dob.value,
+      gender:         getRadio("gender"),
+      phone:          form.phone.value.trim(),
+      email:          form.email.value.trim(),
+      weight:         form.weight.value,
+      bloodGroup:     getRadio("bloodGroup"),
+      donatedBefore:  getRadio("donatedBefore"),
+      lastDonation:   form.lastDonation.value || "N/A",
+      onMedication:   getRadio("onMedication"),
+      medications:    form.medications.value.trim() || "N/A",
+      conditions:     getChecked("conditions"),
+      healthNotes:    form.healthNotes.value.trim() || "None",
+      remarks:        form.remarks.value.trim() || "None",
+    };
+
+    btn.disabled = true;
+    btn.textContent = "⏳ Submitting…";
+
+    try {
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      form.style.display = "none";
+      okScr.style.display = "block";
+      document.getElementById("successDetail").textContent =
+        `Thank you, ${payload.firstName}! You're registered for the June 26 Blood Donation Camp. We'll send a reminder to ${payload.email}.`;
+      document.getElementById("successSummary").innerHTML =
+        `🩸 Blood Group: <strong>${payload.bloodGroup || "Not selected"}</strong> &nbsp;·&nbsp; 🏢 Dept: <strong>${payload.department}</strong>`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    } catch (err) {
+      errBox.textContent = "⚠️ Submission failed. Please check your connection and try again.";
+      errBox.style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "🩸 Register as Donor";
+    }
+  });
+</script>
+</body>
+</html>
